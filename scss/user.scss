@@ -1,0 +1,42 @@
+#user{
+	.top-bar{
+		border-color: #f40;
+		background-color: #f40;
+		color: #fff;
+		height:110px;
+
+		h2{
+			color:#fff;
+			margin-top:45px;
+			margin-left:15px;
+		}
+
+		img{
+			margin-top:30px;
+			min-width:50px;
+			min-height:50px;
+		}
+	}
+
+	.item{
+		margin-bottom: 15px;
+	}
+
+	.row{
+		border-top:1px solid #e8e8e8;
+		margin:0;
+		padding:0;
+
+		.col-xs-3{
+			border-left:1px solid #e8e8e8;
+			padding:10px;
+		}
+		i{
+			font-size:32px;
+		}
+	}
+
+	.bottom-border{
+		border-bottom:1px solid #e8e8e8;
+	}
+}

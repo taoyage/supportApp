@@ -1,0 +1,24 @@
+#menu{
+	.row{
+		margin:0;
+		padding:0;
+
+		.col-xs-6{
+			padding:0;
+		}
+		.item-icon-left{
+			padding-left:20px;
+		}
+	}
+
+	.slider{
+		margin-bottom: 30px;
+		height:200px;
+		.slider-slides{
+			img{
+				height:200px;
+				width:100%;
+			}
+		}
+	}
+}
