@@ -1,0 +1,30 @@
+<ion-view id="login" view-title="login">
+<ion-content>
+<div class="alert alert-danger" ng-if="errorMsg">{{errorMsg}}</div>
+<div class="list">
+	<label class="item item-input">
+		<input type="text" placeholder="student number" ng-model='model.username'>
+	</label>
+	<label class="item item-input">
+		<input type="password" placeholder="password" ng-model='model.password'>
+	</label>
+
+	<label class="item item-input item-select">
+		<div class="input-label">
+			select lesson
+		</div>
+		<select ng-model='model.lesson'>
+			<option>コンピューター概論</option>
+			<option>アーキテクチャー</option>
+			<option>電子回路</option>
+		</select>
+	</label>
+
+</div>
+<div class="padding">
+	<button class="button button-block button-positive" ng-click="login()">sign in</button>
+	<a class="button button-block button-positive" ng-href="#/register">sign up</a>
+</div>
+
+
+</ion-content>

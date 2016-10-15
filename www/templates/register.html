@@ -1,0 +1,21 @@
+<ion-view id="regiser" view-title="register">
+<ion-content>
+<div class="alert alert-danger" ng-show="errorMsg">{{errorMsg}}</div>
+<div class="list">
+	<label class="item item-input">
+		<input type="text" placeholder="student number" ng-model = 'model.username'>
+	</label>
+	<label class="item item-input">
+		<input type="text" placeholder="name" ng-model = 'model.name'>
+	</label>
+	<label class="item item-input">
+		<input type="password" placeholder="password" ng-model = 'model.password'>
+	</label>
+	<label class="item item-input">
+		<input type="password" placeholder="password-repeat" ng-model = 'model.password_repeat'>
+	</label>
+</div>
+<div class="padding">
+	<button class="button button-block button-positive" ng-click="register()">sign up</button>
+</div>
+</ion-content>
