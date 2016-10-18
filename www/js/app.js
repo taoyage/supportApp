@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ionic','percentCircle-directive']);
 
-app.run(function($ionicPlatform,$location) {
+app.run(function($ionicPlatform,$location,$window,$interval) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,111 +14,47 @@ if (window.StatusBar) {
       StatusBar.styleDefault();
     }
 
-    //平台、设备和操作系统
-    var system = {
-      win: false,
-      mac: false,
-      xll: false,
-      ipad:false
-    };
-        //检测平台
-        var p = navigator.platform;
-        console.log(p);
-        system.win = p.indexOf("Win") == 0;
-        system.mac = p.indexOf("Mac") == 0;
-        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false;
-        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面
-        if (system.win || system.mac || system.xll||system.ipad) {
-          alert('Please use a mobile phone to access this page');
-          window.location.href = "http://www.google.com";
-        } 
-        console.log($location);
-        console.log(window.location);
-        var noSleep = new NoSleep();
-        noSleep.enable();
-
-      });
-})
-
-app.config(function($stateProvider, $urlRouterProvider) {
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
+    // //平台、设备和操作系统
+    // var system = {
+    //   win: false,
+    //   mac: false,
+    //   xll: false,
+    //   ipad:false
+    // };
+    //     //检测平台
+    //     var p = navigator.platform;
+    //     console.log(p);
+    //     system.win = p.indexOf("Win") == 0;
+    //     system.mac = p.indexOf("Mac") == 0;
+    //     system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+    //     system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false;
+    //     //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面
+    //     if (system.win || system.mac || system.xll||system.ipad) {
+    //       alert('Please use a mobile phone to access this page');
+    //       window.location.href = "http://www.google.com";
+    //     } 
 
 
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
-  })
-
-  .state('register', {
-    url: '/register',
-    templateUrl: 'templates/register.html',
-    controller: 'registerCtrl'
-  })
-
-  // setup an abstract state for the tabs directive
-  .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.home', {
-    url: '/home',
-    views: {
-      'home': {
-        templateUrl: 'templates/home.html',
-        controller: 'homeCtrl'
-      }
-    }
-  })
-
-  .state('tab.menu', {
-    url: '/menu',
-    views: {
-      'menu': {
-        templateUrl: 'templates/menu.html',
-        controller: 'menuCtrl'
-      }
-    }
-  })
-
-
-  .state('tab.user', {
-    url: '/user',
-    views: {
-      'user': {
-        templateUrl: 'templates/user.html',
-      }
-    }
   });
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
-
-});
-
-app.controller('homeCtrl', ['$scope','$timeout','$location',function($scope,$timeout,$location) {
+})
+app.controller('homeCtrl', ['$scope','$timeout','$location','$window','$interval',function($scope,$timeout,$location,$window,$interval) {
 	$scope.percent = -1;
 
 	document.addEventListener('visibilitychange',function(){
 		if(document.hidden){
-			alert('だめ');
+			socket.disconnect();
 		}
 		else{
 			$location.path('/login');
-			socket.disconnect();
 		}
 	});
 
+	$interval(function() {
+      // $window.$location = $window.$location;
+      $window.location.reload($window.stop);
+      $window.setTimeout($window.stop, 0);
+      console.log(1);
+  }, 15000);
 	
 
 
@@ -205,3 +141,69 @@ app.controller('registerCtrl', ['$scope','$http','$location',function($scope,$ht
 		})		
 	}	
 }]);
+
+
+app.config(function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+
+
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'loginCtrl'
+  })
+
+  .state('register', {
+    url: '/register',
+    templateUrl: 'templates/register.html',
+    controller: 'registerCtrl'
+  })
+
+  // setup an abstract state for the tabs directive
+  .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.home', {
+    url: '/home',
+    views: {
+      'home': {
+        templateUrl: 'templates/home.html',
+        controller: 'homeCtrl'
+      }
+    }
+  })
+
+  .state('tab.menu', {
+    url: '/menu',
+    views: {
+      'menu': {
+        templateUrl: 'templates/menu.html',
+        controller: 'menuCtrl'
+      }
+    }
+  })
+
+
+  .state('tab.user', {
+    url: '/user',
+    views: {
+      'user': {
+        templateUrl: 'templates/user.html',
+      }
+    }
+  });
+
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/login');
+
+});

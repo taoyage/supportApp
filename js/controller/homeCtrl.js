@@ -1,16 +1,21 @@
-app.controller('homeCtrl', ['$scope','$timeout','$location',function($scope,$timeout,$location) {
+app.controller('homeCtrl', ['$scope','$timeout','$location','$window','$interval',function($scope,$timeout,$location,$window,$interval) {
 	$scope.percent = -1;
 
 	document.addEventListener('visibilitychange',function(){
 		if(document.hidden){
-			alert('だめ');
+			socket.disconnect();
 		}
 		else{
 			$location.path('/login');
-			socket.disconnect();
 		}
 	});
 
+	$interval(function() {
+      // $window.$location = $window.$location;
+      $window.location.reload($window.stop);
+      $window.setTimeout($window.stop, 0);
+      console.log(1);
+  }, 15000);
 	
 
 

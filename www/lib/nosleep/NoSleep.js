@@ -44,6 +44,7 @@
     if (ua.iOS) {
       this.disable();
       this.noSleepTimer = window.setInterval(function() {
+        alert(1);
         window.location = window.location;
         window.setTimeout(window.stop, 0);
       }, duration || 15000);
