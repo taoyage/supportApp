@@ -14,7 +14,7 @@ if (window.StatusBar) {
       StatusBar.styleDefault();
     }
 
-    //平台、设备和操作系统
+    // //平台、设备和操作系统
     var system = {
       win: false,
       mac: false,

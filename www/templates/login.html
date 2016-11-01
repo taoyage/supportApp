@@ -2,29 +2,30 @@
 <ion-content>
 <div class="alert alert-danger" ng-if="errorMsg">{{errorMsg}}</div>
 <div class="list">
+<form name="form">
 	<label class="item item-input">
-		<input type="text" placeholder="student number" ng-model='model.username'>
+		<input type="text" name="username" placeholder="student number" ng-model='model.username' required>
+		<span class="text-danger" ng-show="form.username.$error.required">必須</span>
 	</label>
 	<label class="item item-input">
-		<input type="password" placeholder="password" ng-model='model.password'>
+		<input type="password" name="password" placeholder="password" ng-model='model.password' required>
+		<span class="text-danger" ng-show="form.password.$error.required">必須</span>
 	</label>
 
 	<label class="item item-input item-select">
 		<div class="input-label">
 			select lesson
 		</div>
-		<select ng-model='model.lesson'>
+		<select name="lesson" ng-model='model.lesson' required>
 			<option>コンピューター概論</option>
 			<option>アーキテクチャー</option>
 			<option>電子回路</option>
 		</select>
 	</label>
-
+</form>
 </div>
 <div class="padding">
-	<button class="button button-block button-positive" ng-click="login()">sign in</button>
+	<button class="button button-block button-positive" ng-disabled="form.username.$invalid || form.password.$invalid || form.lesson.$invalid" ng-click="login()">sign in</button>
 	<a class="button button-block button-positive" ng-href="#/register">sign up</a>
 </div>
-
-
 </ion-content>

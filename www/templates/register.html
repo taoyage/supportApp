@@ -2,20 +2,31 @@
 <ion-content>
 <div class="alert alert-danger" ng-show="errorMsg">{{errorMsg}}</div>
 <div class="list">
+<form name="form">
 	<label class="item item-input">
-		<input type="text" placeholder="student number" ng-model = 'model.username'>
+		<input type="number" name="username" placeholder="student number" minlength="7" ng-model='model.username' required>
+		<span class="text-danger" ng-show="form.username.$error.required">必須</span>
+		<span class="text-danger" ng-show="form.username.$error.minlength">正しい学籍番号を入力してください</span>
 	</label>
+
 	<label class="item item-input">
-		<input type="text" placeholder="name" ng-model = 'model.name'>
+		<input type="text" name="name" placeholder="name" ng-model='model.name' required>
+		<span class="text-danger" ng-show="form.name.$error.required">必須</span>
 	</label>
+
 	<label class="item item-input">
-		<input type="password" placeholder="password" ng-model = 'model.password'>
+		<input type="password" name="passowrd" placeholder="password" ng-model='model.password' required>
+		<span class="text-danger" ng-show="form.passowrd.$error.required">必須</span>
 	</label>
+
 	<label class="item item-input">
-		<input type="password" placeholder="password-repeat" ng-model = 'model.password_repeat'>
+		<input type="password" name="passwordRepeat" placeholder="password-repeat" ng-model='model.password_repeat' required>
+		<span class="text-danger" ng-show="model.password_repeat != model.password && !form.passwordRepeat.$error.required">a</span>
+		<span class="text-danger" ng-show="form.passwordRepeat.$error.required">必須</span>
 	</label>
+</form>
 </div>
 <div class="padding">
-	<button class="button button-block button-positive" ng-click="register()">sign up</button>
+	<button class="button button-block button-positive" ng-disabled="form.username.$invalid || form.name.$invalid || form.passowrd.$invalid || model.password_repeat != model.password" ng-click="register()">sign up</button>
 </div>
 </ion-content>
